@@ -10,19 +10,35 @@ def main():
     screen = pg.display.set_mode((800, 600))
     clock  = pg.time.Clock()
     bg_img = pg.image.load("fig/pg_bg.jpg")
+    bg_img2 = pg.transform.flip(bg_img, True, False)
     kk_img = pg.image.load("fig/3.png")
     kk_img = pg.transform.flip(kk_img, True, False)
-    kk_img = pg.transform.rotozoom(kk_img, 10, 10)
+    kk_rct = kk_img.get_rect()
+    kk_rct.center = 300, 200
+    screen.blit(kk_img, kk_rct)
     tmr = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        kk_img_x = tmr % 800
-        screen.blit(bg_img, [-kk_img_x, 0])
-        kk_rct = kk_img.rect()#こうかとんの画像
-        kk_rct.center = 300, 200
-        screen.bilt(kk_img, kk_rct)
+        x = tmr % 3200
+        screen.blit(bg_img, [-x, 0])
+        screen.blit(bg_img2, [-x + 1600, 0])
+        screen.blit(bg_img, [-x + 3200, 0])
+        screen.blit(bg_img2, [-x + 4800, 0])
+
+        key_list = pg.key.get_pressed()
+        if key_list[pg.K_UP]:
+            kk_rct.move_ip(0, -1)
+        if key_list[pg.K_DOWN]:
+            kk_rct.move_ip(0, +1)
+        if key_list[pg.K_LEFT]:
+            kk_rct.move_ip(-1, 0)
+        if key_list[pg.K_RIGHT]:
+            kk_rct.move_ip(+1, 0)
+            
+        screen.blit(kk_img, kk_rct)
+        
         pg.display.update()
         tmr += 1        
         clock.tick(200)
