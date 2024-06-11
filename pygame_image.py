@@ -18,8 +18,9 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        screen.blit(bg_img, [0, 0])
-        kk_rct = kk_img.rect()
+        kk_img_x = tmr % 800
+        screen.blit(bg_img, [-kk_img_x, 0])
+        kk_rct = kk_img.rect()#こうかとんの画像
         kk_rct.center = 300, 200
         screen.bilt(kk_img, kk_rct)
         pg.display.update()
