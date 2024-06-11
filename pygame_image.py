@@ -35,9 +35,11 @@ def main():
         if key_list[pg.K_LEFT]:
             kk_rct.move_ip(-1, 0)
         if key_list[pg.K_RIGHT]:
-            kk_rct.move_ip(+1, 0)
-            
+            kk_rct.move_ip(+2, 0)
+            tmr +1
+        
         screen.blit(kk_img, kk_rct)
+        kk_rct.move_ip(-1, 0)
         
         pg.display.update()
         tmr += 1        
